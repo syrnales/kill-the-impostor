@@ -23,6 +23,11 @@ bg_color = Color(0.87181324, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71j4m"]
 bg_color = Color(4.813075e-07, 0.8482276, 0.1519469, 1)
 
+[sub_resource type="Theme" id="Theme_k0juu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfnet"]
+bg_color = Color(0.15294118, 0.15294118, 0.15294118, 0.6509804)
+
 [node name="World" type="Node" unique_id=1203385976]
 script = ExtResource("1_4wyf3")
 
@@ -41,10 +46,10 @@ environment = SubResource("Environment_k0juu")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 451.0
-offset_top = 237.0
-offset_right = -451.0
-offset_bottom = -237.0
+offset_left = 430.0
+offset_top = 183.0
+offset_right = -430.0
+offset_bottom = -183.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -70,7 +75,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="CanvasLayer/Main Menu/MarginContainer/VBoxContainer" unique_id=1488271513]
 layout_mode = 2
-text = "Main Menu"
+text = "Lumen & Friends"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -82,7 +87,12 @@ text = "Host"
 layout_mode = 2
 text = "Join"
 
-[node name="AddressEntry" type="LineEdit" parent="CanvasLayer/Main Menu/MarginContainer/VBoxContainer" unique_id=257291912]
+[node name="UsernameEntry" type="LineEdit" parent="CanvasLayer/Main Menu/MarginContainer/VBoxContainer" unique_id=257291912]
+layout_mode = 2
+placeholder_text = "Enter Username"
+alignment = 1
+
+[node name="AddressEntry" type="LineEdit" parent="CanvasLayer/Main Menu/MarginContainer/VBoxContainer" unique_id=465770128]
 layout_mode = 2
 placeholder_text = "Enter Address to Join"
 alignment = 1
@@ -125,10 +135,51 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_71j4m")
 max_value = 3.0
 value = 3.0
 
+[node name="ChatBox" type="Control" parent="CanvasLayer" unique_id=136915632]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -800.0
+offset_bottom = -327.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Inbox" type="RichTextLabel" parent="CanvasLayer/ChatBox" unique_id=991579631]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_k0juu")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qfnet")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ChatBox" unique_id=884215037]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MessageEntry" type="LineEdit" parent="CanvasLayer/ChatBox/MarginContainer" unique_id=1725889512]
+layout_mode = 2
+placeholder_text = "Enter Message"
+
+[node name="Send" type="Button" parent="CanvasLayer/ChatBox/MarginContainer" unique_id=1775121318]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "SEND"
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1983885055]
 _spawnable_scenes = PackedStringArray("uid://cq6qgi88et8es")
 spawn_path = NodePath("..")
 
 [connection signal="pressed" from="CanvasLayer/Main Menu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Main Menu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ChatBox/MarginContainer/Send" to="." method="_on_send_pressed"]
 [connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]

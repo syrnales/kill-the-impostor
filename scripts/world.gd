@@ -4,35 +4,56 @@ extends Node
 @onready var address_entry: LineEdit = $"CanvasLayer/Main Menu/MarginContainer/VBoxContainer/AddressEntry"
 @onready var hud: Control = $CanvasLayer/HUD
 @onready var health_bar: ProgressBar = $CanvasLayer/HUD/HealthBar
+@onready var chat_box: Control = $CanvasLayer/ChatBox
+@onready var username_entry: LineEdit = $"CanvasLayer/Main Menu/MarginContainer/VBoxContainer/UsernameEntry"
+@onready var message_entry: LineEdit = $CanvasLayer/ChatBox/MarginContainer/MessageEntry
+@onready var send: Button = $CanvasLayer/ChatBox/MarginContainer/Send
+@onready var inbox: RichTextLabel = $CanvasLayer/ChatBox/Inbox
+
 
 const Player = preload("res://scenes/player.tscn")
 const PORT = 9999
 var enet_peer = ENetMultiplayerPeer.new()
+var username : String
+var message : String
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
+	
+	# Open Chat Box
+	if Input.is_action_just_pressed("open_chat"):
+		chat_box.show()
+		message_entry.grab_focus()
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
+	elif Input.is_action_just_pressed("hide_chat"):
+		if chat_box.is_visible_in_tree():
+			chat_box.hide()
+			message_entry.release_focus()
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
 func _on_host_button_pressed() -> void:
-	main_menu.hide()
-	hud.show()
-
+	joined()
+	
 	enet_peer.create_server(PORT)
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
 
 	add_player(multiplayer.get_unique_id())
-	
-	# Uncomment if UPnP is enabled in Host Router
-	# upnp_setup()
 
 func _on_join_button_pressed() -> void:
-	main_menu.hide()
-	hud.show()
+	joined()
 
 	enet_peer.create_client("localhost", PORT)
 	multiplayer.multiplayer_peer = enet_peer
+
+func joined():
+	main_menu.hide()
+	hud.show()
+	username_entry.hide()
+	username = username_entry.text if username_entry.text != "" else str(multiplayer.get_unique_id())
 
 func add_player(peer_id):
 	var player = Player.instantiate()
@@ -53,19 +74,16 @@ func _on_multiplayer_spawner_spawned(node: Node) -> void:
 	if node.is_multiplayer_authority():
 		node.health_changed.connect(update_health_bar)
 
-# Uncomment if UPnP is enabled in Host Router
-# func upnp_setup():
-#	var upnp = UPNP.new()
-#
-#	var discover_result = upnp.discover()
-#	assert(discover_result == UPNP.UPNP_RESULT_SUCCESS, \
-#		"UPNP Discover Failed! Error %s" % discover_result)
+@rpc ("any_peer", "call_local", "reliable")
+func message_rpc(sender_username: String, data: String):
+	inbox.append_text(str(sender_username, ": ", data, "\n"))
 
-#	assert(upnp.get_gateway() and upnp.get_gateway().is_valid_gateway(), \
-#		"UPNP Invalid Gateway!")
-
-#	var map_result = upnp.add_port_mapping(PORT)
-#	assert(map_result == UPNP.UPNP_RESULT_SUCCESS, \
-#		"UPNP Port Mapping Failed! Error %s" % map_result)
+func _on_send_pressed() -> void:
+	var text_to_send = message_entry.text.strip_edges()
+	if text_to_send.is_empty():
+		return
+		
+	message_rpc.rpc(username, text_to_send)
 	
-#	print("Success! Join Address: %s" % upnp.query_external_address())
+	message_entry.text = ""
+	message_entry.release_focus()

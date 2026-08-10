@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://cp6kldk1evqbi"]
+
+[node name="ChatBox" type="Control" unique_id=1672928464]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Inbox" type="TextEdit" parent="." unique_id=1428900842]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=740575886]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MessageEntry" type="LineEdit" parent="MarginContainer" unique_id=786790722]
+layout_mode = 2
+placeholder_text = "Enter Message"
+
+[node name="Send" type="Button" parent="MarginContainer" unique_id=812995903]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "SEND"
+
+[connection signal="pressed" from="MarginContainer/Send" to="." method="_on_send_pressed"]
