@@ -6,6 +6,7 @@ signal health_changed(health_value)
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var muzzle_flash: GPUParticles3D = $Camera3D/water_gun/MuzzleFlash
 @onready var ray_cast_3d: RayCast3D = $Camera3D/RayCast3D
+@onready var player_animation: AnimationPlayer = $PlayerAnimation
 
 const SPEED = 10.0
 const JUMP_VELOCITY = 8.0

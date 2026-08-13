@@ -9,6 +9,7 @@ extends Node
 @onready var message_entry: LineEdit = $CanvasLayer/ChatBox/MarginContainer/MessageEntry
 @onready var send: Button = $CanvasLayer/ChatBox/MarginContainer/Send
 @onready var inbox: RichTextLabel = $CanvasLayer/ChatBox/Inbox
+@onready var main_menu_bg: ColorRect = $CanvasLayer/MainMenuBG
 
 
 const Player = preload("res://scenes/player.tscn")
@@ -51,6 +52,7 @@ func _on_join_button_pressed() -> void:
 
 func joined():
 	main_menu.hide()
+	main_menu_bg.hide()
 	hud.show()
 	username_entry.hide()
 	username = username_entry.text if username_entry.text != "" else str(multiplayer.get_unique_id())

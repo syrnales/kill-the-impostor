@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://cq6qgi88et8es"]
 
-[ext_resource type="PackedScene" uid="uid://0wudgy1vrf8r" path="res://blender/lumen.blend" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dm1rjrp4lgehb" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="PackedScene" uid="uid://dphld08b8nh82" path="res://scenes/red.tscn" id="2_dqkch"]
 [ext_resource type="PackedScene" uid="uid://boxtx68k6b4mv" path="res://blender/water_gun.blend" id="3_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://obidrkjoibmm" path="res://addons/kenney_particle_pack/star_06.png" id="4_dqkch"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3vyb7"]
-height = 2.656067
+radius = 0.6166992
+height = 2.569191
 
 [sub_resource type="Gradient" id="Gradient_qlg0r"]
 offsets = PackedFloat32Array(0, 0.1405229, 0.996732)
@@ -42,26 +43,26 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D/water_gun:position")
+tracks/0/path = NodePath("Camera3D/water_gun:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.8271289, -0.7326734, -1.4179561)]
+"values": [Vector3(0, -1.5707964, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Camera3D/water_gun:rotation")
+tracks/1/path = NodePath("Camera3D/water_gun:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -1.5707964, 0)]
+"values": [Vector3(0.8271289, -0.7326734, -1.4179561)]
 }
 
 [sub_resource type="Animation" id="Animation_dqkch"]
@@ -71,26 +72,26 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D/water_gun:position")
+tracks/0/path = NodePath("Camera3D/water_gun:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1.5),
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
-"values": [Vector3(0.8271289, -0.7326734, -1.4179561), Vector3(0.8271289, -0.8181722, -1.4179561)]
+"values": [Vector3(0, -1.5707964, 0), Vector3(5.706238e-09, -1.5707964, 0.13091715)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Camera3D/water_gun:rotation")
+tracks/1/path = NodePath("Camera3D/water_gun:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 1.5),
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
-"values": [Vector3(0, -1.5707964, 0), Vector3(5.706238e-09, -1.5707964, 0.13091715)]
+"values": [Vector3(0.8271289, -0.7326734, -1.4179561), Vector3(0.8271289, -0.8181722, -1.4179561)]
 }
 
 [sub_resource type="Animation" id="Animation_qlg0r"]
@@ -117,26 +118,26 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D/water_gun:position")
+tracks/0/path = NodePath("Camera3D/water_gun:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
-"values": [Vector3(0.8271289, -0.46158552, -1.4179561), Vector3(0.8271289, -0.7326734, -1.4179561)]
+"values": [Vector3(-2.7442287e-08, -1.5707964, -0.68408185), Vector3(0, -1.5707964, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Camera3D/water_gun:rotation")
+tracks/1/path = NodePath("Camera3D/water_gun:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
-"values": [Vector3(-2.7442287e-08, -1.5707964, -0.68408185), Vector3(0, -1.5707964, 0)]
+"values": [Vector3(0.8271289, -0.46158552, -1.4179561), Vector3(0.8271289, -0.7326734, -1.4179561)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qlg0r"]
@@ -159,14 +160,15 @@ properties/2/spawn = true
 properties/2/replication_mode = 1
 
 [node name="Player" type="CharacterBody3D" unique_id=831400686]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6306975, 0)
 collision_layer = 2
 script = ExtResource("1_g2els")
 
-[node name="lumen" parent="." unique_id=113521288 instance=ExtResource("1_3vyb7")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+[node name="player" parent="." unique_id=381525746 instance=ExtResource("2_dqkch")]
+transform = Transform3D(-2, 0, -3.019916e-07, 0, 2, 0, 3.019916e-07, 0, -2, 0, 0.015623093, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=615029910]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3367629, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2274606, 0)
 shape = SubResource("CapsuleShape3D_3vyb7")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1608344807]

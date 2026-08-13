@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Lumen and Friends"
+run/main_scene="uid://b5sgfi6b3wygb"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,13 +20,18 @@ config/icon="res://icon.svg"
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/sky_3d/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
 "res://addons/": "red",
 "res://blender/": "orange",
 "res://scenes/": "green",
-"res://scripts/": "gray"
+"res://scripts/": "gray",
+"res://ui/": "purple"
 }
 
 [input]

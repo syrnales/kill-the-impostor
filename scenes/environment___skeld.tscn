@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://w8dmpq2vbpeo"]
+
+[ext_resource type="PackedScene" uid="uid://dq3ujyhiykuk" path="res://blender/environment - skeld.blend" id="1_i7odi"]
+
+[node name="environment - skeld" unique_id=1529912390 instance=ExtResource("1_i7odi")]

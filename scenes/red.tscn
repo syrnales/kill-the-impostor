@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dphld08b8nh82"]
+
+[ext_resource type="PackedScene" uid="uid://06c1dx341v5h" path="res://blender/player.blend" id="1_10bml"]
+
+[node name="player" unique_id=509033949 instance=ExtResource("1_10bml")]
+
+[node name="Skeleton3D" parent="Sketchfab_model/astronaut_group_fbx/Object_2/RootNode/Armature/Object_5" parent_id_path=PackedInt32Array(182437650) index="1" unique_id=1214380534]
+transform = Transform3D(0.99929565, -0.026769808, 0.026319593, 0.02761805, 0.049358785, -0.9983995, 0.025427999, 0.998422, 0.05006324, 0, 0, -0.028854765)
