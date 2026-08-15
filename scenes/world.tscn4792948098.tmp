@@ -51,12 +51,9 @@ bg_color = Color(0.87181324, 0, 0, 1)
 bg_color = Color(4.813075e-07, 0.8482276, 0.1519469, 1)
 
 [sub_resource type="Theme" id="Theme_k0juu"]
-LineEdit/colors/font_color = Color(0.58820593, 0.6727969, 0.6647221, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfnet"]
-bg_color = Color(0.08627451, 0.14901961, 0.14509805, 0.6431373)
-
-[sub_resource type="Theme" id="Theme_7t5mc"]
+bg_color = Color(0.15294118, 0.15294118, 0.15294118, 0.6509804)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhx03"]
 shader = ExtResource("4_jhx03")
@@ -111,8 +108,8 @@ shader_parameter/cirrus_absorption = 2.0
 shader_parameter/cirrus_sky_tint_fade = 0.5
 shader_parameter/cirrus_size = 1.0
 shader_parameter/cirrus_uv = Vector2(0.16, 0.11)
-shader_parameter/cirrus_position1 = Vector2(0.7725373, 0.7725373)
-shader_parameter/cirrus_position2 = Vector2(0.7725373, 0.7725373)
+shader_parameter/cirrus_position1 = Vector2(0.7419428, 0.7419428)
+shader_parameter/cirrus_position2 = Vector2(0.7419428, 0.7419428)
 shader_parameter/cirrus_texture = ExtResource("5_o8fc1")
 shader_parameter/cumulus_visible = true
 shader_parameter/cumulus_intensity = 0.6
@@ -122,7 +119,7 @@ shader_parameter/cumulus_absorption = 2.0
 shader_parameter/cumulus_noise_freq = 2.7
 shader_parameter/cumulus_sky_tint_fade = 0.0
 shader_parameter/cumulus_size = 0.5
-shader_parameter/cumulus_position = Vector2(38.983936, 38.983936)
+shader_parameter/cumulus_position = Vector2(33.810608, 33.810608)
 shader_parameter/cumulus_texture = ExtResource("6_xo05s")
 shader_parameter/cumulus_partial_mie_phase = Vector3(0.957564, 1.042436, 0.412)
 shader_parameter/cumulus_mie_intensity = 1.0
@@ -356,17 +353,12 @@ anchor_bottom = 1.0
 offset_top = -31.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = SubResource("Theme_7t5mc")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ChatBox/MarginContainer" unique_id=421498734]
+[node name="MessageEntry" type="LineEdit" parent="CanvasLayer/ChatBox/MarginContainer" unique_id=1725889512]
 layout_mode = 2
-
-[node name="MessageEntry" type="LineEdit" parent="CanvasLayer/ChatBox/MarginContainer/HBoxContainer" unique_id=1725889512]
-layout_mode = 2
-theme_override_constants/minimum_character_width = 19
 placeholder_text = "Enter Message"
 
-[node name="Send" type="Button" parent="CanvasLayer/ChatBox/MarginContainer/HBoxContainer" unique_id=1775121318]
+[node name="Send" type="Button" parent="CanvasLayer/ChatBox/MarginContainer" unique_id=1775121318]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "SEND"
@@ -414,5 +406,5 @@ current_time = 0.3738133333333311
 [connection signal="pressed" from="CanvasLayer/Main Menu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="CanvasLayer/PlayOptions/TextureRect/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PlayOptions/TextureRect/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/ChatBox/MarginContainer/HBoxContainer/Send" to="." method="_on_send_pressed"]
+[connection signal="pressed" from="CanvasLayer/ChatBox/MarginContainer/Send" to="." method="_on_send_pressed"]
 [connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]

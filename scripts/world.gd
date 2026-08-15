@@ -1,15 +1,16 @@
 extends Node
 
 @onready var main_menu: Panel = $"CanvasLayer/Main Menu"
-@onready var address_entry: LineEdit = $"CanvasLayer/Main Menu/MarginContainer/VBoxContainer/AddressEntry"
 @onready var hud: Control = $CanvasLayer/HUD
 @onready var health_bar: ProgressBar = $CanvasLayer/HUD/HealthBar
 @onready var chat_box: Control = $CanvasLayer/ChatBox
-@onready var username_entry: LineEdit = $"CanvasLayer/Main Menu/MarginContainer/VBoxContainer/UsernameEntry"
-@onready var message_entry: LineEdit = $CanvasLayer/ChatBox/MarginContainer/MessageEntry
-@onready var send: Button = $CanvasLayer/ChatBox/MarginContainer/Send
 @onready var inbox: RichTextLabel = $CanvasLayer/ChatBox/Inbox
 @onready var main_menu_bg: ColorRect = $CanvasLayer/MainMenuBG
+@onready var play_options: MarginContainer = $CanvasLayer/PlayOptions
+@onready var username_entry: LineEdit = $CanvasLayer/PlayOptions/TextureRect/VBoxContainer/UsernameEntry
+@onready var address_entry: LineEdit = $CanvasLayer/PlayOptions/TextureRect/VBoxContainer/AddressEntry
+@onready var message_entry: LineEdit = $CanvasLayer/ChatBox/MarginContainer/HBoxContainer/MessageEntry
+@onready var send: Button = $CanvasLayer/ChatBox/MarginContainer/HBoxContainer/Send
 
 
 const Player = preload("res://scenes/player.tscn")
@@ -51,10 +52,9 @@ func _on_join_button_pressed() -> void:
 	multiplayer.multiplayer_peer = enet_peer
 
 func joined():
-	main_menu.hide()
 	main_menu_bg.hide()
 	hud.show()
-	username_entry.hide()
+	play_options.hide()
 	username = username_entry.text if username_entry.text != "" else str(multiplayer.get_unique_id())
 
 func add_player(peer_id):
@@ -89,3 +89,10 @@ func _on_send_pressed() -> void:
 	
 	message_entry.text = ""
 	message_entry.release_focus()
+
+func _on_play_pressed() -> void:
+	main_menu.hide()
+	play_options.show()
+	
+func _on_quit_pressed() -> void:
+	get_tree().quit()
