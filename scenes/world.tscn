@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cecwdqjol0ckd" path="res://addons/sky_3d/assets/textures/noiseClouds.png" id="6_xo05s"]
 [ext_resource type="Texture2D" uid="uid://2r8ylu6rg5dp" path="res://addons/sky_3d/assets/thirdparty/textures/moon/MoonMap.png" id="7_dss4m"]
 [ext_resource type="Texture2D" uid="uid://djpfuyxkryegn" path="res://addons/sky_3d/assets/textures/noise.jpg" id="8_7t5mc"]
+[ext_resource type="Shader" uid="uid://dldb2xpothc4f" path="res://shaders/blur-shader.gdshader" id="8_lakw3"]
 [ext_resource type="Texture2D" uid="uid://bm7dot7t7u1q4" path="res://addons/sky_3d/assets/thirdparty/textures/milkyway/StarField.jpg" id="9_lakw3"]
 [ext_resource type="Texture2D" uid="uid://c1vwcdcdvb74a" path="res://addons/sky_3d/assets/thirdparty/textures/milkyway/Milkyway.jpg" id="10_pm21f"]
 [ext_resource type="Script" uid="uid://deo0gxkmk2ahd" path="res://addons/sky_3d/src/Sky3D.gd" id="11_2lf6f"]
@@ -57,6 +58,10 @@ LineEdit/colors/font_color = Color(0.58820593, 0.6727969, 0.6647221, 1)
 bg_color = Color(0.08627451, 0.14901961, 0.14509805, 0.6431373)
 
 [sub_resource type="Theme" id="Theme_7t5mc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2lf6f"]
+shader = ExtResource("8_lakw3")
+shader_parameter/blur_size = Vector2(1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhx03"]
 shader = ExtResource("4_jhx03")
@@ -111,8 +116,8 @@ shader_parameter/cirrus_absorption = 2.0
 shader_parameter/cirrus_sky_tint_fade = 0.5
 shader_parameter/cirrus_size = 1.0
 shader_parameter/cirrus_uv = Vector2(0.16, 0.11)
-shader_parameter/cirrus_position1 = Vector2(0.7725373, 0.7725373)
-shader_parameter/cirrus_position2 = Vector2(0.7725373, 0.7725373)
+shader_parameter/cirrus_position1 = Vector2(0.5098905, 0.5098905)
+shader_parameter/cirrus_position2 = Vector2(0.5098905, 0.5098905)
 shader_parameter/cirrus_texture = ExtResource("5_o8fc1")
 shader_parameter/cumulus_visible = true
 shader_parameter/cumulus_intensity = 0.6
@@ -122,7 +127,7 @@ shader_parameter/cumulus_absorption = 2.0
 shader_parameter/cumulus_noise_freq = 2.7
 shader_parameter/cumulus_sky_tint_fade = 0.0
 shader_parameter/cumulus_size = 0.5
-shader_parameter/cumulus_position = Vector2(38.983936, 38.983936)
+shader_parameter/cumulus_position = Vector2(62.763012, 62.763012)
 shader_parameter/cumulus_texture = ExtResource("6_xo05s")
 shader_parameter/cumulus_partial_mie_phase = Vector3(0.957564, 1.042436, 0.412)
 shader_parameter/cumulus_mie_intensity = 1.0
@@ -285,8 +290,14 @@ alignment = 1
 [node name="AddressEntry" type="LineEdit" parent="CanvasLayer/PlayOptions/TextureRect/VBoxContainer" unique_id=465770128]
 layout_mode = 2
 theme = SubResource("Theme_oo54l")
-placeholder_text = "Enter Address to Join"
+placeholder_text = "enter room id to join"
 alignment = 1
+
+[node name="RoomID" type="Label" parent="CanvasLayer/PlayOptions/TextureRect/VBoxContainer" unique_id=1648283689]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "loading..."
+horizontal_alignment = 1
 
 [node name="HUD" type="Control" parent="CanvasLayer" unique_id=1148011708]
 visible = false
@@ -370,6 +381,110 @@ placeholder_text = "Enter Message"
 layout_mode = 2
 size_flags_horizontal = 8
 text = "SEND"
+
+[node name="MatchmakingScreen" type="Panel" parent="CanvasLayer" unique_id=1488589736]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="Label" parent="CanvasLayer/MatchmakingScreen" unique_id=1197975139]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -372.0
+offset_top = -34.0
+offset_right = 372.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("5_lakw3")
+theme_override_font_sizes/font_size = 40
+text = "Searching for opponents..."
+vertical_alignment = 1
+
+[node name="Cancel" type="Button" parent="CanvasLayer/MatchmakingScreen" unique_id=684159873]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.0
+offset_top = 140.0
+offset_right = 106.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_lakw3")
+theme_override_font_sizes/font_size = 20
+text = "Cancel"
+
+[node name="Paused" type="Panel" parent="CanvasLayer" unique_id=1319059076]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Paused" unique_id=411944576]
+material = SubResource("ShaderMaterial_2lf6f")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Paused" unique_id=943188504]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -173.0
+offset_right = 150.0
+offset_bottom = -105.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_lakw3")
+theme_override_font_sizes/font_size = 75
+text = "paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Paused" unique_id=1399289507]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.0
+offset_top = 25.954987
+offset_right = 147.0
+offset_bottom = 158.97998
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resume" type="Button" parent="CanvasLayer/Paused/VBoxContainer" unique_id=66605206]
+layout_mode = 2
+theme = ExtResource("5_lakw3")
+text = "resume"
+
+[node name="QuitGame" type="Button" parent="CanvasLayer/Paused/VBoxContainer" unique_id=1031709903]
+layout_mode = 2
+theme = ExtResource("5_lakw3")
+text = "resume"
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1983885055]
 _spawnable_scenes = PackedStringArray("uid://cq6qgi88et8es")
