@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bu74xwmv7dklg"]
+
+[ext_resource type="PackedScene" uid="uid://0tw4f0elldki" path="res://blender/lobby/lobby.glb" id="1_o1atq"]
+
+[node name="lobby" unique_id=686221761 instance=ExtResource("1_o1atq")]
+
+[node name="Cube_002" parent="." index="35" unique_id=1813865669]
+transform = Transform3D(1.1791197, 0, 0, 0, 0.99620837, 0, 0, 0, 1.0437223, 0.057071686, 1.930765, 6.3299727)
+visible = false

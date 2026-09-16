@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b5sgfi6b3wygb"]
 
 [ext_resource type="Script" uid="uid://cb6q2qwb3ufh0" path="res://scripts/world.gd" id="1_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://btkgh405ub5tg" path="res://ui/player_card.tscn" id="2_2lf6f"]
 [ext_resource type="Texture2D" uid="uid://cxcvaesp8d7od" path="res://addons/kenney_particle_pack/circle_05.png" id="3_4wyf3"]
 [ext_resource type="Shader" uid="uid://bns0613p2cc50" path="res://shaders/sky_shader.gdshader" id="3_71j4m"]
 [ext_resource type="PackedScene" uid="uid://dq3ujyhiykuk" path="res://blender/environment - skeld.blend" id="3_k0juu"]
@@ -13,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://2r8ylu6rg5dp" path="res://addons/sky_3d/assets/thirdparty/textures/moon/MoonMap.png" id="7_dss4m"]
 [ext_resource type="Texture2D" uid="uid://djpfuyxkryegn" path="res://addons/sky_3d/assets/textures/noise.jpg" id="8_7t5mc"]
 [ext_resource type="Shader" uid="uid://dldb2xpothc4f" path="res://shaders/blur-shader.gdshader" id="8_lakw3"]
+[ext_resource type="PackedScene" uid="uid://t2x7s3nbmrp7" path="res://scenes/waiting_lobby.tscn" id="8_pm21f"]
 [ext_resource type="Texture2D" uid="uid://bm7dot7t7u1q4" path="res://addons/sky_3d/assets/thirdparty/textures/milkyway/StarField.jpg" id="9_lakw3"]
 [ext_resource type="Texture2D" uid="uid://c1vwcdcdvb74a" path="res://addons/sky_3d/assets/thirdparty/textures/milkyway/Milkyway.jpg" id="10_pm21f"]
 [ext_resource type="Script" uid="uid://deo0gxkmk2ahd" path="res://addons/sky_3d/src/Sky3D.gd" id="11_2lf6f"]
@@ -116,8 +118,8 @@ shader_parameter/cirrus_absorption = 2.0
 shader_parameter/cirrus_sky_tint_fade = 0.5
 shader_parameter/cirrus_size = 1.0
 shader_parameter/cirrus_uv = Vector2(0.16, 0.11)
-shader_parameter/cirrus_position1 = Vector2(0.5098905, 0.5098905)
-shader_parameter/cirrus_position2 = Vector2(0.5098905, 0.5098905)
+shader_parameter/cirrus_position1 = Vector2(0.14421375, 0.14421375)
+shader_parameter/cirrus_position2 = Vector2(0.14421375, 0.14421375)
 shader_parameter/cirrus_texture = ExtResource("5_o8fc1")
 shader_parameter/cumulus_visible = true
 shader_parameter/cumulus_intensity = 0.6
@@ -127,7 +129,7 @@ shader_parameter/cumulus_absorption = 2.0
 shader_parameter/cumulus_noise_freq = 2.7
 shader_parameter/cumulus_sky_tint_fade = 0.0
 shader_parameter/cumulus_size = 0.5
-shader_parameter/cumulus_position = Vector2(62.763012, 62.763012)
+shader_parameter/cumulus_position = Vector2(0.7209653, 0.7209653)
 shader_parameter/cumulus_texture = ExtResource("6_xo05s")
 shader_parameter/cumulus_partial_mie_phase = Vector3(0.957564, 1.042436, 0.412)
 shader_parameter/cumulus_mie_intensity = 1.0
@@ -156,13 +158,7 @@ tonemap_white = 6.0
 
 [node name="World" type="Node" unique_id=1203385976]
 script = ExtResource("1_4wyf3")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=789684213]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 84.44392, 0)
-shadow_enabled = true
-
-[node name="environment - skeld" parent="." unique_id=1529912390 instance=ExtResource("3_k0juu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6137667, 0)
+player_card_scene = ExtResource("2_2lf6f")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=361081259]
 
@@ -382,50 +378,6 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "SEND"
 
-[node name="MatchmakingScreen" type="Panel" parent="CanvasLayer" unique_id=1488589736]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Text" type="Label" parent="CanvasLayer/MatchmakingScreen" unique_id=1197975139]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -372.0
-offset_top = -34.0
-offset_right = 372.0
-offset_bottom = 34.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-theme = ExtResource("5_lakw3")
-theme_override_font_sizes/font_size = 40
-text = "Searching for opponents..."
-vertical_alignment = 1
-
-[node name="Cancel" type="Button" parent="CanvasLayer/MatchmakingScreen" unique_id=684159873]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -106.0
-offset_top = 140.0
-offset_right = 106.0
-offset_bottom = 192.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("5_lakw3")
-theme_override_font_sizes/font_size = 20
-text = "Cancel"
-
 [node name="Paused" type="Panel" parent="CanvasLayer" unique_id=1319059076]
 visible = false
 anchors_preset = 15
@@ -443,25 +395,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/Paused" unique_id=943188504]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -173.0
-offset_right = 150.0
-offset_bottom = -105.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("5_lakw3")
-theme_override_font_sizes/font_size = 75
-text = "paused"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Paused" unique_id=1399289507]
 layout_mode = 1
 anchors_preset = 8
@@ -470,11 +403,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -147.0
-offset_top = 25.954987
+offset_top = -66.5125
 offset_right = 147.0
-offset_bottom = 158.97998
+offset_bottom = 66.5125
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 15
 
 [node name="Resume" type="Button" parent="CanvasLayer/Paused/VBoxContainer" unique_id=66605206]
 layout_mode = 2
@@ -484,11 +418,23 @@ text = "resume"
 [node name="QuitGame" type="Button" parent="CanvasLayer/Paused/VBoxContainer" unique_id=1031709903]
 layout_mode = 2
 theme = ExtResource("5_lakw3")
-text = "resume"
+text = "disconnect"
+
+[node name="WaitingLobby" parent="CanvasLayer" unique_id=702057974 instance=ExtResource("8_pm21f")]
+visible = false
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1983885055]
 _spawnable_scenes = PackedStringArray("uid://cq6qgi88et8es")
 spawn_path = NodePath("..")
+
+[node name="LevelContainer" type="Node3D" parent="." unique_id=14641515]
+
+[node name="environment - skeld" parent="LevelContainer" unique_id=1529912390 instance=ExtResource("3_k0juu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6137667, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=789684213]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 84.44392, 0)
+shadow_enabled = true
 
 [node name="Sky3D" type="WorldEnvironment" parent="." unique_id=1818498426]
 environment = SubResource("Environment_xo05s")
@@ -530,4 +476,8 @@ current_time = 0.3738133333333311
 [connection signal="pressed" from="CanvasLayer/PlayOptions/TextureRect/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PlayOptions/TextureRect/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/ChatBox/MarginContainer/HBoxContainer/Send" to="." method="_on_send_pressed"]
+[connection signal="pressed" from="CanvasLayer/Paused/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="CanvasLayer/Paused/VBoxContainer/QuitGame" to="." method="_on_quit_game_pressed"]
+[connection signal="started_game" from="CanvasLayer/WaitingLobby" to="." method="_on_waiting_lobby_started_game"]
+[connection signal="started_game" from="CanvasLayer/WaitingLobby" to="CanvasLayer/WaitingLobby" method="_on_started_game"]
 [connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://btkgh405ub5tg"]
+
+[ext_resource type="Texture2D" uid="uid://dk27puttf4bps" path="res://assets/icon-lobby.png" id="1_e5fil"]
+
+[node name="PlayerCard" type="VBoxContainer" unique_id=1751015135]
+offset_right = 49.0
+offset_bottom = 27.0
+
+[node name="PlayerIcon" type="TextureRect" parent="." unique_id=816948177]
+layout_mode = 2
+texture = ExtResource("1_e5fil")
+
+[node name="Nametag" type="Label" parent="." unique_id=130775553]
+layout_mode = 2
+text = "Player"
+horizontal_alignment = 1
